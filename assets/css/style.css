@@ -1460,3 +1460,54 @@ footer .credits {
 footer .credits a {
   color: #fff;
 }
+
+
+/* Updated  */
+/* Ensure the container is centered and responsive */
+#contact .container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Center content and adjust column width for smaller screens */
+#contact .col-md-8 {
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Responsive styling for the contact section */
+@media (max-width: 768px) {
+  #contact .title-left {
+    font-size: 1.5rem;
+  }
+
+  #contact .more-info p {
+    font-size: 1rem;
+  }
+
+  #contact .socials ul li {
+    display: block;
+    margin: 10px 0;
+  }
+}
+
+/* Adjust the contact section for very small screens */
+@media (max-width: 576px) {
+  #contact .title-left {
+    font-size: 1.25rem;
+  }
+
+  #contact .more-info p {
+    font-size: 0.875rem;
+  }
+  
+  #contact .list-ico li {
+    font-size: 0.875rem;
+  }
+
+  #contact .socials ul li {
+    margin: 5px 0;
+  }
+}
+
