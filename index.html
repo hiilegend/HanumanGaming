@@ -1,254 +1,104 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-
-// --------------------------------------------------
-// Single-file React component for a futuristic
-// gradient portfolio. Built with Tailwind CSS + Framer Motion.
-// Drop this file into your React app (e.g. src/components/Portfolio.jsx)
-// --------------------------------------------------
-
-const projects = [
-  {
-    title: "Screw Puzzle",
-    link: "https://play.google.com/store/apps/details?id=com.screw.puzzle.nuts.bolts.jam.puzzle&hl=en_IN",
-    description:
-      "A fun and challenging puzzle game published on the Play Store, focused on solving mechanical screw and bolt patterns.",
-    tags: ["Unity", "C#", "Mobile"],
-    image: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&q=60",
-    type: "playstore",
-  },
-  {
-    title: "Carrom Pool Disc Game",
-    link: "https://play.google.com/store/apps/details?id=com.carrom.pool.disc.online.offline.game&hl=en_IN",
-    description:
-      "A digital Carrom experience — both offline and online — blending physics accuracy and smooth UX.",
-    tags: ["Unity", "Multiplayer", "Mobile"],
-    image: "https://images.unsplash.com/photo-1545235617-9465f4d4f2d3?auto=format&fit=crop&w=1200&q=60",
-    type: "playstore",
-  },
-  {
-    title: "Quiz Pulse",
-    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    description: "A quiz app with progressive difficulty and continent-based level design, published on Play Store.",
-    tags: ["Unity", "Firebase", "Android"],
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=60",
-    type: "youtube",
-  },
-  {
-    title: "AI Racing Car",
-    link: "#",
-    description: "An experimental Unity project integrating AI-based car control and dynamic racing environments.",
-    tags: ["Unity", "AI", "C#"],
-    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=60",
-    type: "internal",
-  },
-  {
-    title: "Snake & Ladder",
-    link: "#",
-    description: "Classic board game recreated with dynamic animations and clean UI.",
-    tags: ["Unity", "2D", "Game Logic"],
-    image: "https://images.unsplash.com/photo-1526318472351-c75fcf0702dd?auto=format&fit=crop&w=1200&q=60",
-    type: "internal",
-  },
-  {
-    title: "Cube Runner",
-    link: "#",
-    description: "A fast-paced obstacle runner designed with modular gameplay loops and procedural difficulty.",
-    tags: ["Unity", "3D", "Endless Runner"],
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60",
-    type: "internal",
-  },
-];
-
-const experiences = [
-  {
-    company: "SDLCCorp",
-    role: "Unity Developer",
-    date: "Feb 2025 – Present",
-    description:
-      "Working on Unity-based mobile and AR/VR projects. Focused on performance optimization, gameplay systems, and user experience polish.",
-  },
-  {
-    company: "Vasundhara Infotech",
-    role: "Unity Developer",
-    date: "Aug 2023 – Sep 2024",
-    description:
-      "Developed and shipped multiple Play Store games, including Screw Puzzle and Carrom Pool Disc Game. Responsible for gameplay systems and UI integration.",
-  },
-];
-
-const skills = ["Unity", "C#", "AR/VR", "Firebase", "Git", "DSA", "AR/VR", "Shader Dev"];
-
-export default function Portfolio() {
-  const [videoId, setVideoId] = useState(null);
-
-  function openProject(proj) {
-    if (proj.type === "youtube" && proj.link) {
-      // extract youtube id (basic)
-      const idMatch = proj.link.match(/[?&]v=([^&]+)/);
-      const shortMatch = proj.link.match(/youtu\.be\/([^?&]+)/);
-      const id = idMatch ? idMatch[1] : shortMatch ? shortMatch[1] : null;
-      if (id) setVideoId(id);
-      else window.open(proj.link, "_blank", "noopener,noreferrer");
-    } else if (proj.type === "playstore") {
-      // open playstore link in new tab
-      window.open(proj.link, "_blank", "noopener,noreferrer");
-    } else {
-      // fallback - open in new tab or handle internal modal later
-      if (proj.link && proj.link !== "#") window.open(proj.link, "_blank", "noopener,noreferrer");
-      else alert("Project details coming soon — will add a demo/video here.");
-    }
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#071029] via-[#0f1b3a] to-[#1a1533] text-gray-100 font-sans">
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/3 border-b border-white/6 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
-              Himanshu | Game Dev
-            </h1>
-            <p className="text-xs text-gray-400">Unity • AR/VR • Mobile Games</p>
-          </div>
-
-          <nav className="hidden md:flex gap-6 text-sm">
-            <a href="#projects" className="hover:text-cyan-300">
-              Projects
-            </a>
-            <a href="#experience" className="hover:text-cyan-300">
-              Experience
-            </a>
-            <a href="#skills" className="hover:text-cyan-300">
-              Skills
-            </a>
-            <a href="#contact" className="hover:text-cyan-300">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">
-            Building the bridge between reality and imagination.
-          </h2>
-          <p className="mt-6 text-gray-300 text-lg">
-            Unity Developer passionate about crafting immersive games, AR/VR experiences, and interactive worlds that blend technology with creativity.
-          </p>
-          <div className="mt-8 flex gap-4">
-            <a href="#projects" className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-violet-600 text-white rounded-lg shadow-lg hover:shadow-violet-500/30 transition">
-              Explore Projects
-            </a>
-            <a href="https://www.linkedin.com/in/himanshu-tripathi-111509201" className="px-6 py-3 border border-cyan-400 rounded-lg hover:bg-cyan-500/6 transition">
-              LinkedIn
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
-          <div className="w-full rounded-2xl shadow-2xl border border-cyan-600/20 overflow-hidden">
-            <img src={"https://source.unsplash.com/collection/190727/800x800"} alt="profile" className="w-full h-72 object-cover" />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Experience */}
-      <section id="experience" className="max-w-6xl mx-auto px-6 py-12">
-        <h3 className="text-3xl font-semibold mb-6">Experience</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          {experiences.map((exp) => (
-            <motion.div key={exp.company} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="bg-white/3 border border-white/6 p-5 rounded-2xl">
-              <h4 className="text-xl font-semibold text-cyan-300">{exp.company}</h4>
-              <p className="text-sm text-gray-400">{exp.role} • {exp.date}</p>
-              <p className="mt-3 text-gray-300 text-sm">{exp.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="max-w-6xl mx-auto px-6 py-12">
-        <h3 className="text-3xl font-semibold mb-6">Projects</h3>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((proj) => (
-            <motion.div key={proj.title} className="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-white/2 to-white/3 border border-white/6" whileHover={{ scale: 1.02 }}>
-              <button onClick={() => openProject(proj)} className="w-full text-left">
-                <div className="w-full h-44 overflow-hidden">
-                  <img src={proj.image} alt={proj.title} className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" />
-                </div>
-
-                <div className="p-4">
-                  <div className="flex items-start justify-between">
-                    <h4 className="text-lg font-semibold text-cyan-300">{proj.title}</h4>
-                    <span className="text-xs text-gray-400">{proj.type === 'youtube' ? 'Video' : proj.type === 'playstore' ? 'Play Store' : ''}</span>
-                  </div>
-
-                  <p className="text-gray-300 text-sm mt-2 line-clamp-3">{proj.description}</p>
-
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {proj.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-1 border border-cyan-400/20 rounded-full">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section id="skills" className="max-w-6xl mx-auto px-6 py-12">
-        <h3 className="text-3xl font-semibold mb-6">Skills</h3>
-        <div className="flex flex-wrap gap-3">
-          {skills.map((s) => (
-            <span key={s} className="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">{s}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="max-w-6xl mx-auto px-6 py-12 text-center">
-        <h3 className="text-3xl font-semibold mb-3">Get in Touch</h3>
-        <p className="text-gray-300 mb-4">Have an idea or opportunity? Let’s connect and build something amazing.</p>
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <a href="mailto:himanshutripathi708142@gmail.com" className="px-6 py-3 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-lg text-white shadow-lg hover:shadow-violet-500/30 transition">Email Me</a>
-          <a href="https://www.linkedin.com/in/himanshu-tripathi-111509201" className="px-6 py-3 border border-cyan-400 rounded-lg hover:bg-cyan-500/6 transition">LinkedIn Profile</a>
-        </div>
-      </section>
-
-      <footer className="text-center py-6 border-t border-white/6 text-sm text-gray-500">© {new Date().getFullYear()} Himanshu Tripathi. All Rights Reserved.</footer>
-
-      {/* Youtube Modal */}
-      {videoId && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/60 p-4">
-          <div className="w-full max-w-3xl bg-[#071029] rounded-2xl overflow-hidden shadow-2xl">
-            <div className="flex justify-between items-center p-3 border-b border-white/6">
-              <h4 className="text-lg font-semibold">Project Video</h4>
-              <button onClick={() => setVideoId(null)} className="px-3 py-1 rounded bg-white/6">Close</button>
-            </div>
-            <div className="w-full h-0 relative" style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                title="youtube-player"
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full border-0"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Himanshu Tripathi | Game Dev Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+</head>
+<body class="bg-gradient-to-br from-[#071029] via-[#0f1b3a] to-[#1a1533] text-gray-100 font-sans">
+  <!-- Header -->
+  <header class="backdrop-blur-md bg-white/3 border-b border-white/6 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">Himanshu | Game Dev</h1>
+        <p class="text-xs text-gray-400">Unity • AR/VR • Mobile Games</p>
+      </div>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="#projects" class="hover:text-cyan-300">Projects</a>
+        <a href="#experience" class="hover:text-cyan-300">Experience</a>
+        <a href="#skills" class="hover:text-cyan-300">Skills</a>
+        <a href="#contact" class="hover:text-cyan-300">Contact</a>
+      </nav>
     </div>
-  );
-}
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h2 class="text-4xl md:text-5xl font-extrabold leading-tight bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">Building the bridge between reality and imagination.</h2>
+      <p class="mt-6 text-gray-300 text-lg">Unity Developer passionate about crafting immersive games, AR/VR experiences, and interactive worlds that blend technology with creativity.</p>
+      <div class="mt-8 flex gap-4">
+        <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-violet-600 text-white rounded-lg shadow-lg hover:shadow-violet-500/30 transition">Explore Projects</a>
+        <a href="https://www.linkedin.com/in/himanshu-tripathi-111509201" class="px-6 py-3 border border-cyan-400 rounded-lg hover:bg-cyan-500/6 transition">LinkedIn</a>
+      </div>
+    </div>
+    <div class="w-full rounded-2xl shadow-2xl border border-cyan-600/20 overflow-hidden">
+      <img src="https://source.unsplash.com/collection/190727/800x800" alt="profile" class="w-full h-72 object-cover">
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="max-w-6xl mx-auto px-6 py-12">
+    <h3 class="text-3xl font-semibold mb-6">Experience</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white/3 border border-white/6 p-5 rounded-2xl">
+        <h4 class="text-xl font-semibold text-cyan-300">SDLCCorp</h4>
+        <p class="text-sm text-gray-400">Unity Developer • Feb 2025 – Present</p>
+        <p class="mt-3 text-gray-300 text-sm">Working on Unity-based mobile and AR/VR projects. Focused on performance optimization, gameplay systems, and user experience polish.</p>
+      </div>
+      <div class="bg-white/3 border border-white/6 p-5 rounded-2xl">
+        <h4 class="text-xl font-semibold text-cyan-300">Vasundhara Infotech</h4>
+        <p class="text-sm text-gray-400">Unity Developer • Aug 2023 – Sep 2024</p>
+        <p class="mt-3 text-gray-300 text-sm">Developed and shipped multiple Play Store games, including Screw Puzzle and Carrom Pool Disc Game. Responsible for gameplay systems and UI integration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-12">
+    <h3 class="text-3xl font-semibold mb-6">Projects</h3>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <a href="https://play.google.com/store/apps/details?id=com.screw.puzzle.nuts.bolts.jam.puzzle&hl=en_IN" target="_blank" class="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-white/2 to-white/3 border border-white/6 block hover:scale-105 transition-transform">
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&q=60" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="text-lg font-semibold text-cyan-300">Screw Puzzle</h4>
+          <p class="text-gray-300 text-sm mt-2">A fun and challenging puzzle game published on the Play Store, focused on solving mechanical screw and bolt patterns.</p>
+          <div class="mt-3 flex flex-wrap gap-2"><span class="text-xs px-2 py-1 border border-cyan-400/20 rounded-full">Unity</span><span class="text-xs px-2 py-1 border border-cyan-400/20 rounded-full">C#</span><span class="text-xs px-2 py-1 border border-cyan-400/20 rounded-full">Mobile</span></div>
+        </div>
+      </a>
+      <!-- Repeat similar project cards for other projects -->
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-12">
+    <h3 class="text-3xl font-semibold mb-6">Skills</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">Unity</span>
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">C#</span>
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">AR/VR</span>
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">Firebase</span>
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">Git</span>
+      <span class="px-4 py-2 border border-violet-400/20 rounded-full text-sm bg-white/3">DSA</span>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="max-w-6xl mx-auto px-6 py-12 text-center">
+    <h3 class="text-3xl font-semibold mb-3">Get in Touch</h3>
+    <p class="text-gray-300 mb-4">Have an idea or opportunity? Let’s connect and build something amazing.</p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <a href="mailto:himanshutripathi708142@gmail.com" class="px-6 py-3 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-lg text-white shadow-lg hover:shadow-violet-500/30 transition">Email Me</a>
+      <a href="https://www.linkedin.com/in/himanshu-tripathi-111509201" class="px-6 py-3 border border-cyan-400 rounded-lg hover:bg-cyan-500/6 transition">LinkedIn Profile</a>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 border-t border-white/6 text-sm text-gray-500">© 2025 Himanshu Tripathi. All Rights Reserved.</footer>
+</body>
+</html>
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
