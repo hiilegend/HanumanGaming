@@ -23,12 +23,16 @@
       </nav>
     </div>
   </header> -->
-  <header class="backdrop-blur-md bg-white/5 border-b border-white/10 sticky top-0 z-50">
+  
+  <header class="relative backdrop-blur-md bg-white/5 border-b border-white/10 sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-fuchsia-500 bg-clip-text text-transparent">
-      Himanshu | Game Dev
-    </h1>
-    
+    <div>
+      <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-fuchsia-500 bg-clip-text text-transparent">
+        Himanshu | Game Dev
+      </h1>
+      <p class="text-xs text-gray-400 hidden md:block">Unity • AR/VR • Mobile Games</p>
+    </div>
+
     <!-- Desktop Nav -->
     <nav class="hidden md:flex gap-6 text-sm">
       <a href="#projects" class="hover:text-indigo-400">Projects</a>
@@ -36,9 +40,9 @@
       <a href="#skills" class="hover:text-indigo-400">Skills</a>
       <a href="#contact" class="hover:text-indigo-400">Contact</a>
     </nav>
-    
+
     <!-- Hamburger Button for Mobile -->
-    <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1">
+    <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none">
       <span class="block w-8 h-0.5 bg-white"></span>
       <span class="block w-8 h-0.5 bg-white"></span>
       <span class="block w-8 h-0.5 bg-white"></span>
@@ -46,11 +50,11 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white/5 border-t border-white/10">
-    <a href="#projects" class="block px-6 py-3 hover:bg-white/10">Projects</a>
-    <a href="#experience" class="block px-6 py-3 hover:bg-white/10">Experience</a>
-    <a href="#skills" class="block px-6 py-3 hover:bg-white/10">Skills</a>
-    <a href="#contact" class="block px-6 py-3 hover:bg-white/10">Contact</a>
+  <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white/5 border-t border-white/10 shadow-md flex flex-col">
+    <a href="#projects" class="block px-6 py-3 hover:bg-white/10" onclick="toggleMenu()">Projects</a>
+    <a href="#experience" class="block px-6 py-3 hover:bg-white/10" onclick="toggleMenu()">Experience</a>
+    <a href="#skills" class="block px-6 py-3 hover:bg-white/10" onclick="toggleMenu()">Skills</a>
+    <a href="#contact" class="block px-6 py-3 hover:bg-white/10" onclick="toggleMenu()">Contact</a>
   </div>
 </header>
 
@@ -61,7 +65,12 @@
   btn.addEventListener('click', () => {
     menu.classList.toggle('hidden');
   });
+
+  function toggleMenu() {
+    menu.classList.add('hidden');
+  }
 </script>
+
 
 
   <!-- Hero Section -->
